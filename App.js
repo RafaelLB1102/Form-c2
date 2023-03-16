@@ -1,10 +1,12 @@
 import React,{useState} from 'react';
 import  {UserForm}  from './src/components/UserForm';
-import { Modal, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Modal, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { User } from './src/components/User';
 
 export default function App() {
   const [modalVisible, setModalVisible] = useState(false)
   const [modalUserForm,setModalUserForm] = useState(false)
+  const [registeredUsers,setRegisterdUsers] = useState([])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -20,7 +22,26 @@ export default function App() {
       <Pressable onPress={() => {setModalUserForm(true)}} style = {styles.btnNewUser}>
         <Text style = {styles.title}>Nuevo Usuario</Text>
       </Pressable>
-      <UserForm modalUserForm={modalUserForm} setModalUserForm={setModalUserForm}></UserForm>
+      {
+        registeredUsers.length === 0 ? (
+          <Text style = {styles.textNoUser}>No hay usuarios Registrados</Text>
+        ) : (
+          <FlatList
+            data = {registeredUsers}
+            keyExtractor = {(item) => item.id}
+            renderItem={ ({item}) => {
+              console.log(item);
+              return <User item = {item}/>
+            }}
+          />
+        )
+      }
+      <UserForm 
+        modalUserForm={modalUserForm} 
+        setModalUserForm={setModalUserForm}
+        registeredUsers = {registeredUsers}
+        setRegisterdUsers = {setRegisterdUsers}
+      ></UserForm>
 
       <Modal animationType='slide' visible={modalVisible}>
         <Text>Desde Modal</Text>
