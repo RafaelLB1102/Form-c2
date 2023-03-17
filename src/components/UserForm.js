@@ -192,6 +192,7 @@ const styles = StyleSheet.create({
     },
     inputCommnets : {
       height : 100,
+      marginHorizontal : 30
     },
     inputDate : {
       textAlign : "center"

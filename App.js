@@ -2,11 +2,15 @@ import React,{useState} from 'react';
 import  {UserForm}  from './src/components/UserForm';
 import { FlatList, Modal, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { User } from './src/components/User';
+import { ExampleForm } from './src/components/ExampleForm';
+import { Book } from './src/components/Book';
 
 export default function App() {
   const [modalVisible, setModalVisible] = useState(false)
   const [modalUserForm,setModalUserForm] = useState(false)
+  const [modalExampleForm,setModalExampleForm] = useState(false)
   const [registeredUsers,setRegisterdUsers] = useState([])
+  const [dataArray,setdataArray] = useState([])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -42,6 +46,31 @@ export default function App() {
         registeredUsers = {registeredUsers}
         setRegisterdUsers = {setRegisterdUsers}
       ></UserForm>
+
+      <Pressable onPress={() => {setModalExampleForm(true)}} style = {styles.btnNewUser}>
+        <Text style = {styles.title}>Nuevo Libro</Text>
+      </Pressable>
+      {
+        dataArray.length === 0 ? (
+          <Text style = {styles.textNoUser}>No hay Libros Registrados</Text>
+        ) : (
+          <FlatList
+            data = {dataArray}
+            keyExtractor = {(item) => item.id}
+            renderItem={ ({item}) => {
+              console.log(item);
+              return <Book item = {item}/>
+            }}
+          />
+        )
+      }
+      <ExampleForm 
+        modalExampleForm={modalExampleForm}
+        setModalExampleForm={setModalExampleForm}
+        dataArray={dataArray}
+        setdataArray={setdataArray}
+      />
+      
 
       <Modal animationType='slide' visible={modalVisible}>
         <Text>Desde Modal</Text>
