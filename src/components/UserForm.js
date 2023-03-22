@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {ImageBackground, StyleSheet, Text, View,Modal, Image, ScrollView, TextInput, Pressable, Alert} from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 
 export const UserForm = (

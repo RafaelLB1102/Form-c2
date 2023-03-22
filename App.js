@@ -55,6 +55,7 @@ export default function App() {
           <Text style = {styles.textNoUser}>No hay Libros Registrados</Text>
         ) : (
           <FlatList
+            style = {styles.userList}
             data = {dataArray}
             keyExtractor = {(item) => item.id}
             renderItem={ ({item}) => {
@@ -104,6 +105,10 @@ const styles = StyleSheet.create({
     textAlign : "center",
     fontSize: 20,
     color : "#000000"
+  },
+  userList : {
+    marginTop : 50,
+    marginHorizontal : 30
   }
 });
 
