@@ -60,7 +60,7 @@ export default function App() {
             keyExtractor = {(item) => item.id}
             renderItem={ ({item}) => {
               console.log(item);
-              return <Book item = {item}/>
+              return <Book item = {item} setModalUserForm = {setModalUserForm}/>
             }}
           />
         )
