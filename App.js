@@ -9,8 +9,18 @@ export default function App() {
   const [modalVisible, setModalVisible] = useState(false)
   const [modalUserForm,setModalUserForm] = useState(false)
   const [modalExampleForm,setModalExampleForm] = useState(false)
-  const [registeredUsers,setRegisterdUsers] = useState([])
+  const [registeredUsers,setRegisteredUsers] = useState([])
   const [dataArray,setdataArray] = useState([])
+  const [user, setUser] = useState({})
+
+
+  const editUser = (id) => {
+    console.log("usuario",id);
+    const editUser = registeredUsers.filter((user)=> user.id === id);
+    setUser(editUser[0])
+    console.log(editUser);
+  }
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,7 +45,11 @@ export default function App() {
             keyExtractor = {(item) => item.id}
             renderItem={ ({item}) => {
               console.log(item);
-              return <User item = {item}/>
+              return <User item = {item} 
+              setModalUserForm = {setModalUserForm}
+              editUser = {editUser}
+              user = {user}
+              />
             }}
           />
         )
@@ -44,7 +58,8 @@ export default function App() {
         modalUserForm={modalUserForm} 
         setModalUserForm={setModalUserForm}
         registeredUsers = {registeredUsers}
-        setRegisterdUsers = {setRegisterdUsers}
+        setRegisteredUsers = {setRegisteredUsers}
+        user = {user}
       ></UserForm>
 
       <Pressable onPress={() => {setModalExampleForm(true)}} style = {styles.btnNewUser}>
@@ -60,7 +75,7 @@ export default function App() {
             keyExtractor = {(item) => item.id}
             renderItem={ ({item}) => {
               console.log(item);
-              return <Book item = {item} setModalUserForm = {setModalUserForm}/>
+              return <Book item = {item} />
             }}
           />
         )
