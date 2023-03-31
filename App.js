@@ -10,8 +10,11 @@ export default function App() {
   const [modalUserForm,setModalUserForm] = useState(false)
   const [modalExampleForm,setModalExampleForm] = useState(false)
   const [registeredUsers,setRegisteredUsers] = useState([])
-  const [dataArray,setdataArray] = useState([])
   const [user, setUser] = useState({})
+
+
+  const [dataArray,setdataArray] = useState([])
+  const [book, setBook] = useState({})
 
 
   const editUser = (id) => {
@@ -19,6 +22,13 @@ export default function App() {
     const editUser = registeredUsers.filter((user)=> user.id === id);
     setUser(editUser[0])
     console.log(editUser);
+  }
+
+  const editBook = (id) => {
+    console.log("book",id)
+    const editedBook = dataArray.filter((book) => book.id=== id )
+    setBook(editedBook[0])
+    console.log(editedBook);
   }
 
 
@@ -75,7 +85,10 @@ export default function App() {
             keyExtractor = {(item) => item.id}
             renderItem={ ({item}) => {
               console.log(item);
-              return <Book item = {item} />
+              return <Book item = {item} 
+              setModalExampleForm={setModalExampleForm}
+              editBook={editBook}
+              />
             }}
           />
         )
@@ -85,6 +98,7 @@ export default function App() {
         setModalExampleForm={setModalExampleForm}
         dataArray={dataArray}
         setdataArray={setdataArray}
+        book={book}
       />
       
 

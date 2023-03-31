@@ -1,23 +1,63 @@
-import React, { useState } from 'react';
-import { ImageBackground, StyleSheet, Text, View, Modal, Image, ScrollView, TextInput, Pressable, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Modal, Image, ScrollView, TextInput, Pressable, Alert } from 'react-native';
 
 
 export const ExampleForm = (
     { modalExampleForm,
         setModalExampleForm,
         dataArray,
-        setdataArray }
+        setdataArray,
+        book: bookObj
+    }
 ) => {
 
-
+    const [id, setId] = useState("");
     const [bookName, setbookName] = useState("");
     const [numberOfPages, setnumberOfPages] = useState("");
     const [history, sethistory] = useState("");
     const [comments, setComments] = useState("");
 
+    console.log(Object.keys(bookObj));
+
+    useEffect(() => {
+        console.log("Entre al useEffect");
+        console.log("info del objeto user" + bookObj.id);
+        if (Object.keys(bookObj).length > 0) {
+            console.log("Entre al condicional del useEffect");
+            setId(bookObj.id);
+            setbookName(bookObj.bookName);
+            setnumberOfPages(bookObj.numberOfPages);
+            sethistory(bookObj.history);
+            setComments(bookObj.comments);
+        }
+    }, [bookObj]);
+
     const handleBook = () => {
-        if ([bookName, numberOfPages, history, comments].includes("")) {
-            Alert.alert("Error", "Hay campos sin diligenciar");
+
+        console.log("Handling user...");
+
+        const fields = {
+            "Book Name": bookName,
+            "Number of pages": numberOfPages,
+            "History": history,
+            "Comments": comments,
+        };
+
+        const emptyFields = Object.entries(fields)
+            .filter(([, value]) => value === "")
+            .map(([key]) => key);
+
+        if (emptyFields.length > 0) {
+            console.log("Error: Hay campos sin diligenciar:", emptyFields.join(", "));
+            return;
+        }
+
+        if (![bookName, numberOfPages, history, comments].every(field => field !== "")) {
+            console.log("Error: Hay campos sin diligenciar");
+            setTimeout(() => {
+                Alert.alert("Error", "Hay campos sin diligenciar");
+            }, 100);
+            return;
         }
 
         const newBook = {
@@ -27,7 +67,18 @@ export const ExampleForm = (
             history,
             comments
         };
-        
+
+        if (id) {
+            // Editar
+            newBook.id = id;
+            console.log("Editando", newBook);
+            const userEdited = registeredUsers.map()
+          } else {
+            // Nuevo registro
+            newBook.id = Date.now();
+            setdataArray([...dataArray, newBook]);
+        }
+
         setdataArray([...dataArray, newBook]);
         setModalExampleForm(!modalExampleForm);
 
