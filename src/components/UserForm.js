@@ -111,10 +111,10 @@ export const UserForm = ({
     } else {
       // Nuevo registro
       newUser.id = Date.now();
-      setRegisteredUsers([...registeredUsers, newUser]);
+      setRegisteredUsers([...registeredUsers, newUser]); 
     }
 
-    setRegisteredUsers([...registeredUsers, newUser]);
+/*     setRegisteredUsers([...registeredUsers, newUser]); */
     setModalUserForm(!modalUserForm);
   
     setUserName("");
