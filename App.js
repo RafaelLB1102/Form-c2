@@ -59,6 +59,7 @@ export default function App() {
               setModalUserForm = {setModalUserForm}
               editUser = {editUser}
               user = {user}
+              
               />
             }}
           />
@@ -70,6 +71,7 @@ export default function App() {
         registeredUsers = {registeredUsers}
         setRegisteredUsers = {setRegisteredUsers}
         user = {user}
+        setUser = {setUser}
       ></UserForm>
 
       <Pressable onPress={() => {setModalExampleForm(true)}} style = {styles.btnNewUser}>

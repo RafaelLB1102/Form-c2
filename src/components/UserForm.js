@@ -19,7 +19,8 @@ export const UserForm = ({
   setModalUserForm,
   registeredUsers,
   setRegisteredUsers,
-  user: userObj
+  user: userObj,
+  setUser
 }) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
@@ -101,7 +102,12 @@ export const UserForm = ({
       // Editar
       newUser.id = id;
       console.log("Editando", newUser);
-      const userEdited = registeredUsers.map()
+      const userEdited = registeredUsers.map((userState) => 
+        userState.id === newUser.id ? newUser : userState
+      );
+      setRegisteredUsers(userEdited)
+      console.log(userEdited)
+      setUser({})
     } else {
       // Nuevo registro
       newUser.id = Date.now();
@@ -141,7 +147,15 @@ export const UserForm = ({
 
           <Pressable
             style={styles.btnExit}
-            onPress={() => setModalUserForm(false)}
+            onPress={() => {
+              setModalUserForm(false)
+              setUser({})
+              setUserName("");
+              setUserEmail("");
+              setCellphone("");
+              setDate(new Date());
+              setComments("");
+            }}
           >
             <Text style={styles.btnTextExit}>X cerrar</Text>
           </Pressable>
