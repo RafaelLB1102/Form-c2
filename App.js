@@ -24,6 +24,13 @@ export default function App() {
     console.log(editUser);
   }
 
+  const eliminateUser = (id) => {
+    console.log("usuario",id);
+    const editUser = registeredUsers.filter((user)=> user.id !== id);
+    setRegisteredUsers(editUser)
+    console.log(editUser);
+  }
+
   const editBook = (id) => {
     console.log("book",id)
     const editedBook = dataArray.filter((book) => book.id=== id )
@@ -57,9 +64,9 @@ export default function App() {
               console.log(item);
               return <User item = {item} 
               setModalUserForm = {setModalUserForm}
-              editUser = {editUser}
               user = {user}
-              
+              editUser = {editUser}
+              eliminatedUser={eliminateUser}
               />
             }}
           />
