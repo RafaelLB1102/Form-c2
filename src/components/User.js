@@ -23,6 +23,7 @@ export const User = ({ item, setModalUserForm, editUser, eliminatedUser }) => {
                 <View style={styles.buttons}>
                     <Pressable style={[styles.btn, styles.btnEdit]} 
                         onPress = {() => {
+                            setModalUserForm(true)
                             editUser(id)
                         }}
 
@@ -31,7 +32,6 @@ export const User = ({ item, setModalUserForm, editUser, eliminatedUser }) => {
                     </Pressable>
                     <Pressable style={[styles.btn, styles.btnDeleteOne]}
                         onPress = {() => {
-                            setModalUserForm(true)
                             eliminatedUser(id)
                         }}
                     >

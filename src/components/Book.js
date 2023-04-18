@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet, Pressable } from "react-native";
 
-export const Book = ({item, setModalExampleForm,editBook}) => {
-    const {bookName, numberOfPages, id} = item
+export const Book = ({ item, setModalExampleForm, editBook, eliminateBook }) => {
+    const { bookName, numberOfPages, id } = item
     return (
         <View style={styles.container}>
             <View style={styles.content}>
@@ -11,21 +11,25 @@ export const Book = ({item, setModalExampleForm,editBook}) => {
                 <Text style={styles.label}># de páginas</Text>
                 <Text style={styles.text}>{numberOfPages}</Text>
                 <View style={styles.buttons}>
-                    <Pressable style={[styles.btn, styles.btnEdit]} 
-                    onPress = {() => {
-                        setModalExampleForm(true)
-                        editBook(id)
-                    }}
+                    <Pressable style={[styles.btn, styles.btnEdit]}
+                        onPress={() => {
+                            setModalExampleForm(true)
+                            editBook(id)
+                        }}
                     >
                         <Text style={styles.text}>Editar</Text>
                     </Pressable>
-                    <Pressable style={[styles.btn, styles.btnDeleteOne]}>
+                    <Pressable style={[styles.btn, styles.btnDeleteOne]}
+                        onPress={() => {
+                            eliminateBook(id)
+                        }}
+                    >
                         <Text style={styles.text}>Eliminar</Text>
                     </Pressable>
 
                 </View>
             </View>
-            
+
         </View>
     );
 };

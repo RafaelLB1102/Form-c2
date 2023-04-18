@@ -7,7 +7,8 @@ export const ExampleForm = (
         setModalExampleForm,
         dataArray,
         setdataArray,
-        book: bookObj
+        book: bookObj,
+        setBook
     }
 ) => {
 
@@ -72,14 +73,18 @@ export const ExampleForm = (
             // Editar
             newBook.id = id;
             console.log("Editando", newBook);
-            const userEdited = registeredUsers.map()
+            const editedBook = dataArray.map((userState) => 
+            userState.id === newBook.id ? newBook : userState)
+            setdataArray(editedBook)
+            console.log(editedBook)
+            setBook({})
           } else {
             // Nuevo registro
             newBook.id = Date.now();
             setdataArray([...dataArray, newBook]);
         }
 
-        setdataArray([...dataArray, newBook]);
+        /* setdataArray([...dataArray, newBook]); */
         setModalExampleForm(!modalExampleForm);
 
         setbookName("");

@@ -38,6 +38,12 @@ export default function App() {
     console.log(editedBook);
   }
 
+  const eliminateBook = (id) => {
+    console.log("usuario",id);
+    const book = dataArray.filter((book)=> book.id !== id);
+    setdataArray(book)
+    console.log(book);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -97,6 +103,7 @@ export default function App() {
               return <Book item = {item} 
               setModalExampleForm={setModalExampleForm}
               editBook={editBook}
+              eliminateBook={eliminateBook}
               />
             }}
           />
@@ -108,6 +115,7 @@ export default function App() {
         dataArray={dataArray}
         setdataArray={setdataArray}
         book={book}
+        setBook={setBook}
       />
       
 
